@@ -1,0 +1,19 @@
+Blueprint Specification
+This page describes the current blueprint format, introduced in the 0.2 update. Legacy blueprints generated in previous VCB versions start with "PLUv/", the new blueprints begin with "VCB+"
+Bytes are in big-endian order.
+
+Header
+3-byte blueprint identifier (VCB+)
+3-byte blueprint version
+6-byte checksum (truncated SHA-1) of the remaining characters of the blueprint string
+4-byte width
+4-byte height
+
+Layer Block(s)
+4-byte block size
+4-byte layer id (Logic = 0, Deco On =1, Deco Off = 2)
+4-byte uncompressed buffer size
+N-byte zstd-compressed RGBA8 buffer
+
+The Logic layer block must be present in all blueprints.
+Decoration layer blocks are optional but if used both of them must be included.
